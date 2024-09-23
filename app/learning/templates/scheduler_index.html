@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Maker</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #2833a7; /* Green font color */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url("{{url_for('static',filename='all backgrounds.png')}}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        form {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff; /* Green font color */
+            margin-top: 0; /* Remove default margin for h1 */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #16279a; /* Green background color */
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #4b5b8a; /* Darker green on hover */
+        }
+
+        /* Add some spacing between elements */
+        div {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Schedule Maker</h1>
+    <form method="post">
+        <div>
+            <label for="start_time">Start Time:</label>
+            <input type="time" id="start_time" name="start_time" required>
+        </div>
+
+        <div>
+            <label for="end_time">End Time:</label>
+            <input type="time" id="end_time" name="end_time" required>
+        </div>
+
+        <div id="break-container">
+            <!-- Break fields will be added here dynamically -->
+        </div>
+        <button type="button" id="add-break-button">Add Break</button>
+
+        <div id="task-container">
+            <!-- Task fields will be added here dynamically -->
+        </div>
+        <button type="button" id="add-task-button">Add Task</button>
+
+        <button type="submit">Generate Schedule</button>
+    </form>
+    {% if error_message %}
+        <script>
+            alert("{{ error_message }}");
+        </script>
+    {% endif %}
+
+    <script>
+        // JavaScript to add break fields dynamically
+        let breakId = 0;
+    
+        document.getElementById('add-break-button').addEventListener('click', function () {
+            const breakContainer = document.getElementById('break-container');
+            const breakDiv = document.createElement('div');
+            breakDiv.innerHTML = `
+                <label for="break_start_time_${breakId}">Break ${breakId + 1} Start Time:</label>
+                <input type="time" id="break_start_time_${breakId}" name="break_start_times[]" required>
+                <label for="break_end_time_${breakId}">Break ${breakId + 1} End Time:</label>
+                <input type="time" id="break_end_time_${breakId}" name="break_end_times[]" required><br>
+            `;
+            breakContainer.appendChild(breakDiv);
+            breakId++;
+    
+            // Provide visual feedback (for example, by changing the background color)
+            breakDiv.style.backgroundColor = '#d3d3d3'; // Light green background
+            setTimeout(() => {
+                breakDiv.style.backgroundColor = ''; // Reset background color after a short delay
+            }, 2000); // 2000 milliseconds (2 seconds)
+        });
+    
+        // JavaScript to add task fields dynamically
+        let taskId = 0;
+    
+        document.getElementById('add-task-button').addEventListener('click', function () {
+            const taskContainer = document.getElementById('task-container');
+            const taskDiv = document.createElement('div');
+            taskDiv.innerHTML = `
+                <label for="task_name_${taskId}">Task ${taskId + 1} Name:</label>
+                <input type="text" id="task_name_${taskId}" name="task_names[]" required>
+                <label for="task_duration_${taskId}">Task ${taskId + 1} Duration (in minutes):</label>
+                <input type="number" id="task_duration_${taskId}" name="task_durations[]" required><br>
+            `;
+            taskContainer.appendChild(taskDiv);
+            taskId++;
+    
+            // Provide visual feedback
+            taskDiv.style.backgroundColor = '#d3d3d3'; // Light green background
+            setTimeout(() => {
+                taskDiv.style.backgroundColor = ''; // Reset background color after a short delay
+            }, 2000); // 2000 milliseconds (2 seconds)
+        });
+    </script>
+</body>
+
+</html>

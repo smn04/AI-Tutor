@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>User Profile</title>
+    <!-- Add your styles here -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+            background-image: url("{{url_for('static',filename='all backgrounds.png')}}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        span {
+            font-weight: normal;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        a:active {
+            background-color: #0056b3;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>User Profile</h1>
+    <div>
+        <label>Name:</label>
+        <span>{{ user.name }}</span>
+    </div>
+    <div>
+        <label>Username:</label>
+        <span>{{ user.username }}</span>
+    </div>
+    <div>
+        <label>Learning Style:</label>
+        <span>
+            {% if user.learning_style == 'v' %}
+                Visual
+            {% elif user.learning_style == 'a' %}
+                Auditory
+            {% elif user.learning_style == 'r' %}
+                Reading/Writing
+            {% elif user.learning_style == 'k' %}
+                Kinesthetic
+            {% else %}
+                Unknown
+            {% endif %}
+        </span>
+    </div>
+</body>
+
+</html>

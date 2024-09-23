@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summarizer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 50px;
+            background-image: url("{{url_for('static',filename='all backgrounds.png')}}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        label {
+            margin: 10px;
+            font-size: 18px;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: rgb(5, 25, 136);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #4e6f92;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Choose the type of data to summarize:</h1>
+    <form action="{{ url_for('summariser.file_summariser') }}" method="post">
+        <label>
+            <input type="radio" name="file_type" value="pdf" required> PDF
+        </label>
+        <label>
+            <input type="radio" name="file_type" value="ppt" required> PPT
+        </label>
+        <label>
+            <input type="radio" name="file_type" value="text" required> Text
+        </label>
+        <button type="submit">Next</button>
+    </form>
+</body>
+
+</html>

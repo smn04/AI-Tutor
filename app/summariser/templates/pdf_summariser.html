@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 50px;
+            background-image: url("{{url_for('static',filename='all backgrounds.png')}}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        label {
+            margin: 10px;
+            font-size: 18px;
+            color: #ebe8e8; /* Dark gray text color */
+        }
+
+        input[type="file"],
+        input[type="range"],
+        input[type="number"] {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ced4da; /* Light gray border */
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: rgb(5, 25, 136);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #4e6f92;
+        }
+        .range-input {
+            -webkit-appearance: none;
+            appearance: none; 
+            width: 100%;
+            cursor: pointer;
+            outline: none;
+            border-radius: 15px;
+            height: 6px;
+            background: #ccc;
+            }
+
+            .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none; 
+            height: 15px;
+            width: 15px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50%;
+            border: none;
+            transition: .2s ease-in-out;
+            }
+
+            .range-input::-moz-range-thumb {
+            height: 15px;
+            width: 15px;
+            background-color: rgb(171, 171, 171);
+            border-radius: 50%;
+            border: none;
+            transition: .2s ease-in-out;
+            }
+
+            .range-input::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 0 10px rgb(0, 221, 255)
+            }
+            .range-input:active::-webkit-slider-thumb {
+            box-shadow: 0 0 0 13px rgb(0, 221, 255)
+            }
+            .range-input:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 13px rgba(255,85,0, .2)
+            }
+
+            .range-input::-moz-range-thumb:hover {
+            box-shadow: 0 0 0 10px rgb(0, 221, 255)
+            }
+            .range-input:active::-moz-range-thumb {
+            box-shadow: 0 0 0 13px rgb(0, 221, 255)
+            }
+            .range-input:focus::-moz-range-thumb {
+            box-shadow: 0 0 0 13px rgb(0, 221, 255)    
+            }
+
+            .value2, .value3, .value4 {
+            font-size: 26px;    
+            width: 50px;
+            text-align: center;
+            }
+    </style>
+</head>
+
+<body>
+    <h1>PDF Summarizer</h1>
+    <form action="{{ url_for('summariser.pdf_summariser') }}" method="post" enctype="multipart/form-data">
+        <label>Select PDF file:</label>
+        <input type="file" name="file" accept=".pdf" required>
+        <br>
+        <label>Summary Ratio:</label>
+        <input id="range2" type="range" name="summary_ratio" min="0" max="100" step="10" value="20" class="range-input" />
+        <div class="value2">0</div>
+        <br>
+        <button type="submit">Summarize</button>
+    </form>
+    <script>
+        const sliderEl = document.querySelector("#range2")
+        const sliderValue = document.querySelector(".value2")
+
+        sliderEl.addEventListener("input", (event) => {
+        const tempSliderValue = event.target.value; 
+        sliderValue.textContent = tempSliderValue;
+        
+        const progress = (tempSliderValue / sliderEl.max) * 100;
+        
+        sliderEl.style.background = `linear-gradient(to right, #f50 ${progress}%, #ccc ${progress}%)`;
+        })
+
+    </script>
+</body>
+
+</html>

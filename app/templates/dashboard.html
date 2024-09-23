@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- Add your styles here -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: url("{{url_for('static',filename='landing page.png')}}");
+      background-size: cover;
+      background-repeat: no-repeat;
+
+
+    }
+
+    h1 {
+      color: #343a40;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 30px;
+    }
+
+    li {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    a {
+      display: block;
+      padding: 20px;
+      background-color: #fff;
+      color: #114174;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+      box-shadow: 0 14px 10px rgba(0, 0, 0, 0.364);
+    }
+
+    a:hover {
+      background-color: #a2bad3;
+    }
+
+    a:active {
+      background-color: #0056b3;
+      transform: translateY(2px);
+    }
+
+    footer {
+      color: #6c757d;
+    }
+
+    .profile-img {
+      width: 40px; /* Adjust the width of the profile image */
+      height: 40px; /* Adjust the height of the profile image */
+      border-radius: 50%;
+      margin-right: 5px; /* Adjust the margin as needed */
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 10px; /* Adjust the margin as needed */
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 40px; /* Adjust the top position as needed */
+      right: 0;
+      background-color: #f9f9f9;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #000;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dash-img {
+      width: auto;
+      max-height: 350px; /* Maintain aspect ratio */ /* Adjust margin as needed */
+      margin-top: 20px; /* Adjust margin as needed */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dropdown">
+    <img src="{{ url_for('static', filename='profile.jpg') }}" alt="Profile Image" class="profile-img">
+    <div class="dropdown-content">
+      <a href="{{ url_for('profile') }}">Profile</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <ul>
+      <li><a href="{{ url_for('ocr') }}">OCR</a></li>
+      <li><a href="{{ url_for('lesson.lesson_index') }}">Lesson</a></li>
+      <li><a href="{{ url_for('scheduler') }}">Scheduler</a></li>
+      <li><a href="{{ url_for('summariser') }}">Summariser</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

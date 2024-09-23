@@ -1,0 +1,89 @@
+<!-- templates/results.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Aid - Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            background-image: url("{{url_for('static',filename='all backgrounds.png')}}");
+            background-size: cover;
+            background-repeat: no-repeat;
+
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000;
+        }
+
+        .search-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #image {
+            text-align: center; /* Center the content horizontally */
+            margin-bottom: 20px; /* Add some space at the bottom */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        #image img {
+            max-width: 100%; /* Ensure the image doesn't exceed its container width */
+        }
+
+        #results {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Learning Aid</h1>
+        
+        <div class="search-info">
+            <h2>Search Results</h2>
+            <p><strong>Search Query:</strong> {{ search_query }}</p>
+        </div>
+        
+        <div id="image">
+            {% if image_url %}
+                <img src="{{ image_url }}" alt="Image based on the search query">
+            {% endif %}
+        </div>
+
+        <div id="results">
+            <ul>
+                {% for point in content.split('. ') %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- You can display additional search results or perform actions based on user input here. -->
+    </div>
+</body>
+</html>
+
