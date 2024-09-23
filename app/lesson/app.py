@@ -9,7 +9,7 @@ lesson_bp = Blueprint('lesson', __name__, template_folder='templates')
 
 def fetch_youtube_videos(search_query):
     """Fetch YouTube videos related to the search query"""
-    youtube_api_key = 'AIzaSyD8ZIYTpYyDLSfi-4XFMEyGTVhHG7inqsg'  # Replace with your API key
+    youtube_api_key = '#api_key'  # Replace with your API key
     search_url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q={search_query}&type=video&order=relevance&videoCaption=closedCaption&videoCategory=27&key={youtube_api_key}'
 
     response = requests.get(search_url)
@@ -54,7 +54,7 @@ def lesson_results():
         content = page.summary[:3000]  # Fetch up to 3000 characters
         last_full_stop_index = content.rfind('.')
         content = content[:last_full_stop_index + 1]
-        pexels_api_key = 'UpOfH4AudTEoT7MpHWa8EekQZr7oV3DxUgKqIXUwZqdnYOXBtb45q8be'
+        pexels_api_key = 'api_key'
         response = requests.get(f'https://api.pexels.com/v1/search?query={search_query}', headers={'Authorization': pexels_api_key})
         if response.status_code == 200:
             data = response.json()
